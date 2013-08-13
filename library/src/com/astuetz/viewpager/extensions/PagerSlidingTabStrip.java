@@ -56,6 +56,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private LinearLayout.LayoutParams defaultTabLayoutParams;
 	private LinearLayout.LayoutParams expandedTabLayoutParams;
+	
+	//Fixed tabs
+	public boolean enableFixedTabs = false;
 
 	private final PageListener pageListener = new PageListener();
 	public OnPageChangeListener delegatePageListener;
@@ -268,7 +271,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 			View v = tabsContainer.getChildAt(i);
 
-			v.setLayoutParams(defaultTabLayoutParams);
+			if(!enableFixedTabs)
+				v.setLayoutParams(defaultTabLayoutParams);
+			else
+				v.setLayoutParams(expandedTabLayoutParams);
 			v.setBackgroundResource(tabBackgroundResId);
 			if (shouldExpand) {
 				v.setPadding(0, 0, 0, 0);
